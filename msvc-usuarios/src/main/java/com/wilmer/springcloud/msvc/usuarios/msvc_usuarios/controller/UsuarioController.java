@@ -19,8 +19,9 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping
-    public List<Usuario> listar(){
-        return usuarioService.listar();
+    public Map<String, List<Usuario>> listar(){
+
+        return Collections.singletonMap("usuarios", usuarioService.listar());
     }
 
     @GetMapping("/{id}")
@@ -40,7 +41,7 @@ public class UsuarioController {
             return validation(result);
         }
         if(!usuario.getEmail().isEmpty() && usuarioService.existsByEmail(usuario.getEmail())){
-            return ResponseEntity.badRequest().body(Collections.singletonMap("mensaje", "Ya existe un usuario con este correo electronico"));
+            return ResponseEntity.badRequest().body(Collections.singletonMap("mensaje", "Ya existe un usuario con este correo"));
         }
         return ResponseEntity.status(HttpStatus.CREATED).body( usuarioService.guardar(usuario) );
     }
