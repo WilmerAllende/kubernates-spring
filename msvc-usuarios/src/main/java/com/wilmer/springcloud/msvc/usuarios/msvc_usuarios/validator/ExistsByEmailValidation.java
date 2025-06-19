@@ -20,7 +20,7 @@ public class ExistsByEmailValidation implements ConstraintValidator<ExistByEmail
             return  true;
         }
         if (!requestContextHolder.isPostRequest()) {
-            return true; // No validar si no es POST
+            return true; //   No validar si no es   POST
         }
         return  !service.existsByEmail(s);
     }

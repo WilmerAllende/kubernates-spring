@@ -5,11 +5,16 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Component
 public class RequestContextHolderHttpValidation {
+
     public boolean isPostRequest() {
-        var attributes = org.springframework.web.context.request.RequestContextHolder.getRequestAttributes();
-        if (attributes instanceof ServletRequestAttributes servletAttributes) {
+        var attributesRequest = org.springframework.web.context.request.RequestContextHolder.getRequestAttributes();
+
+        if (attributesRequest instanceof ServletRequestAttributes servletAttributes) {
+
             return "POST".equalsIgnoreCase(servletAttributes.getRequest().getMethod());
+
         }
         return false;
     }
+
 }
